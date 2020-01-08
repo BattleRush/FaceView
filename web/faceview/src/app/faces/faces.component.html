@@ -1,0 +1,86 @@
+<div *ngIf="allFaces != null" style="padding: 20px; min-height: 900px;">
+
+    <div fxLayout="row wrap" fxLayoutGap="32px">
+        <div fxFlex="0 1 calc(650px)" style="margin-bottom: 20px;">
+
+            <mat-card class="add-face-main-card">
+                <mat-card-header>
+                    <mat-card-title>Add new face</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="container">
+                        <div fxLayout="row wrap" style="height: 205px;">
+                            <div fxFlex="0 1 calc(50% - 32px)">
+                                <h2>Face info:</h2>
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Name (min. 3 characters)" [(ngModel)]="newFaceName">
+                                </mat-form-field>
+                                <br />
+                                <button #file mat-flat-button color="primary">Select image
+                                    <input #fileInput (change)="fileChangeEvent($event)"
+                                        style="opacity: 0; position:absolute; left:0px; top:0px; width:100%; height:100%;"
+                                        type="file" accept="image/*" />
+                                </button>
+
+                                <button mat-raised-button color="accent" (click)="loadLastImage()">Select live image            
+                                </button>
+                            </div>
+
+
+                            <div fxFlex="0 1 calc(50% - 32px)" [hidden]="!imageReady">
+                                <h2>Preview:</h2>
+                                <img style="width: 150px;" [src]="croppedImage" />
+                            </div>
+                        </div>
+
+
+                        <br />
+                        <br />
+
+
+                        <br />
+                        <div [hidden]="!imageReady">
+                            <image-cropper style="width: 500px;" [imageChangedEvent]="imageChangedEvent"
+                            [imageBase64]="imageBase64String"
+                                [resizeToWidth]="0" [aspectRatio]="1 / 1" [maintainAspectRatio]="true"
+                                (imageCropped)="imageCropped($event)">
+                            </image-cropper>
+                        </div>
+
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button *ngIf="this.newFaceName != null && this.croppedImage != null && this.newFaceName.length >= 3" mat-raised-button color="primary" (click)="addNewFace()">Add face</button>
+                    <button *ngIf="this.newFaceName == null || this.croppedImage == null || this.newFaceName.length < 3" mat-raised-button color="warn">Fill all fields</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+
+        <div fxFlex="0 1 calc(100% - 700px)">
+
+
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px grid" fxLayoutAlign="flex-start">
+            <ng-container *ngFor="let face of allFaces">
+                <div style="margin-top: 0px;" fxFlex="0 1 calc(25% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{face.name}}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="container">
+                                <img style="width: 100px;" src="{{face.imageBase64}}" />
+                            </div>
+                            <button style="position: absolute;
+                            bottom: 20px;
+                            right: 15px;"  mat-raised-button color="warn" (click)="removeFace(face)"><mat-icon aria-hidden="false" aria-label="Delete face">delete_forever</mat-icon></button>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+
+    </div>
+</div>

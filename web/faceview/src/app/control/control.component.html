@@ -1,0 +1,175 @@
+<mat-drawer-container class="settings-container" *ngIf="currentSettings != null">
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start" style="padding: 20px;">
+
+        <div fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+            <mat-card class="settings-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Settings</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="container">
+                        Video mode:
+                        <mat-radio-group aria-label="Select an option" [(ngModel)]="currentSettings.currentVideoMode">
+                            <mat-radio-button [value]="0">File</mat-radio-button>
+                            <mat-radio-button [value]="1">Live</mat-radio-button>
+                            <mat-radio-button [value]="2">Image</mat-radio-button>
+                        </mat-radio-group>
+                        <br />
+                        <br />
+                        Detection mode:
+                        <mat-radio-group aria-label="Select an option"
+                            [(ngModel)]="currentSettings.currentDetectionMode">
+                            <mat-radio-button [value]="0">Nothing</mat-radio-button>
+                            <mat-radio-button [value]="1">Detect faces</mat-radio-button>
+                            <mat-radio-button [value]="2">Recognize faces</mat-radio-button>
+                            <mat-radio-button [value]="3">Record</mat-radio-button>
+                        </mat-radio-group>
+                        <br />
+                        <br />
+                        <br />
+
+                        <div *ngIf="currentSettings.currentVideoMode == 1">
+                            <button mat-raised-button
+                                [color]="currentSettings.liveResolution == 0 ? 'accent' : 'primary'"
+                                (click)="currentSettings.liveResolution = 0;" style="width: 230px;">3264 x 2464 (102 :
+                                77) @ 5 fps</button>
+                            <button mat-raised-button
+                                [color]="currentSettings.liveResolution == 1 ? 'accent' : 'primary'"
+                                (click)="currentSettings.liveResolution = 1;" style="float: right;width: 230px;">3264 x
+                                1848 (136 : 77) @ 5 fps</button><br /><br />
+                            <button mat-raised-button
+                                [color]="currentSettings.liveResolution == 2 ? 'accent' : 'primary'"
+                                (click)="currentSettings.liveResolution = 2;" style="width: 230px;">1920 x 1080 (16 : 9)
+                                @ 15 fps </button>
+                            <button mat-raised-button
+                                [color]="currentSettings.liveResolution == 3 ? 'accent' : 'primary'"
+                                (click)="currentSettings.liveResolution = 3;" style="float: right;width: 230px;">1280 x
+                                720 (16 : 9) @ 30 fps</button>
+
+                        </div>
+
+
+                        <mat-form-field class="example-full-width"
+                            *ngIf="currentSettings.currentVideoMode == 0 || currentSettings.currentVideoMode == 2"
+                            style="width: 400px;">
+                            <input matInput placeholder="Path to file" value="{{currentSettings.videoPath}}"
+                                [(ngModel)]="currentSettings.videoPath">
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+
+                    <button mat-raised-button color="primary" (click)="saveSettings()">SAVE SETTINGS</button>
+                    <button mat-raised-button color="secondary" (click)="startVid()">START Vid</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <br />
+    <mat-card class="crop-card" style="min-height: 700px;">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Crop Image</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="container">
+                <!--<div style="margin-left:20%;"><img width="480" height="360" [src]="lastImageLink"></div>-->
+                <!--<app-cropper src="{{baseUrl}}:4200/api/last_image"></app-cropper>-->
+
+                <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start" style="padding: 20px;">
+                        <div fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3 style="margin: 16px 0 0 0;">Cropp settings</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Heigth:</td>
+                                <td>{{currentSettings.croppSettings.height}}</td>
+                            </tr>
+                            <tr>
+                                <td>Width:</td>
+                                <td>{{currentSettings.croppSettings.width}}</td>
+                            </tr>
+                            <tr>
+                                <td>Original height:</td>
+                                <td>{{currentSettings.croppSettings.originalHeight}}</td>
+                            </tr>
+                            <tr>
+                                <td>Original width:</td>
+                                <td>{{currentSettings.croppSettings.originalWidth}}</td>
+                            </tr>
+                            <tr>
+                                <td>X:</td>
+                                <td>{{currentSettings.croppSettings.x}}</td>
+                            </tr>
+                            <tr>
+                                <td>Y:</td>
+                                <td>{{currentSettings.croppSettings.y}}</td>
+                            </tr>
+                        </table>
+                        <!--<p>
+                        Current Crop:
+                        <br />
+                        x: {{currentSettings.croppSettings.x}}
+                        <br />
+                        y: {{currentSettings.croppSettings.y}}
+                        <br />
+                        height: {{currentSettings.croppSettings.height}}
+                        <br />
+                        width: {{currentSettings.croppSettings.width}}
+                        <br />
+                        orig_height: {{currentSettings.croppSettings.origHeight}}
+                        <br />
+                        orig_width: {{currentSettings.croppSettings.origWidth}}
+                        <br />
+                        </p>-->
+
+                    </div>
+
+
+                    <div fxFlex="0 1 calc(66.6% - 32px)" fxFlex.lt-md="0 1 calc(66.6% - 32px)" fxFlex.lt-sm="100%">
+                            <img style="height: 200px" [src]="croppedBase64" />
+                    </div>
+                </div>
+
+                <br />
+
+                <div style="height: 500px" *ngIf="loadedImage">
+                    <image-cropper [imageBase64]="lastImageBase64" [resizeToWidth]="0" [aspectRatio]="21 / 9"
+                        [maintainAspectRatio]="true" (imageCropped)="imageCropped($event)"></image-cropper>
+                </div>
+                <br />
+                <br />
+
+
+                <!--<image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 3"
+    [resizeToWidth]="128"
+    format="png"
+    
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+></image-cropper>-->
+
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+
+            <button mat-raised-button color="primary" (click)="reloadImg()">Get Last Image</button>
+            <button mat-raised-button color="secondary" (click)="startVid()">START Vid</button>
+        </mat-card-actions>
+
+    </mat-card>
+
+</mat-drawer-container>
+
+
+<br />

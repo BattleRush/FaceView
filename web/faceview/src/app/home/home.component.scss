@@ -1,0 +1,88 @@
+.blinking {
+    -webkit-animation: 1.5s blink ease infinite;
+    -moz-animation: 1.5s blink ease infinite;
+    -ms-animation: 1.5s blink ease infinite;
+    -o-animation: 1.5s blink ease infinite;
+    animation: 1.5s blink ease infinite;
+    
+    /*http://angrytools.com/gradient/*/
+    background:radial-gradient(ellipse at center, rgba(255,0,0,1) 40%, rgba(212,0,0,0) 50%, rgba(0,0,0,0) 100%); /* w3c */
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
+  @keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @-moz-keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @-webkit-keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @-ms-keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @-o-keyframes blink {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+
+  .img-overlay-wrap {
+    width: 100%;
+    position: relative;
+    display: inline-block; /* <= shrinks container to image size */
+    transition: transform 150ms ease-in-out;
+  }
+  
+  .img-overlay-wrap img { /* <= optional, for responsiveness */
+     width: inherit;
+     min-height: 200px;
+  }
+  .img-overlay-wrap div {
+	position:absolute;
+	bottom:-100px;
+	left:0;
+	background:#000;
+    color:#fff;
+    width: 100%;
+    margin:0;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 16px;
+}
+
+.settings-main-card{
+    min-width: 310px;
+}

@@ -1,0 +1,141 @@
+<div *ngIf="currentSettings != null" style="padding: 20px;">
+
+
+    <!--<div style="margin-left:20%;"><img width="480" height="360" src="{{baseUrl}}:5000/api/video_feed"></div>-->
+
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start" style="padding: 20px;">
+        <div fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+            <mat-card class="settings-main-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Current Settings</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="container">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3 style="margin: 0;">Cropp settings</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Heigth:</td>
+                                <td>{{currentSettings.croppSettings.height}}</td>
+                            </tr>
+                            <tr>
+                                <td>Width:</td>
+                                <td>{{currentSettings.croppSettings.width}}</td>
+                            </tr>
+                            <tr>
+                                <td>Original height:</td>
+                                <td>{{currentSettings.croppSettings.originalHeight}}</td>
+                            </tr>
+                            <tr>
+                                <td>Original width:</td>
+                                <td>{{currentSettings.croppSettings.originalWidth}}</td>
+                            </tr>
+                            <tr>
+                                <td>X:</td>
+                                <td>{{currentSettings.croppSettings.x}}</td>
+                            </tr>
+                            <tr>
+                                <td>Y:</td>
+                                <td>{{currentSettings.croppSettings.y}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3 style="margin: 16px 0 0 0;">General settings</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Video mode:</td>
+                                <td>{{getVideoModeText(currentSettings.currentVideoMode)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Detection mode:</td>
+                                <td>{{getDetectionModeText(currentSettings.currentDetectionMode)}}</td>
+                            </tr>
+                            <tr *ngIf="currentSettings.currentVideoMode == 1">
+                                <td>Live resolution:</td>
+                                <td>{{getLiveResolutionText(currentSettings.liveResolution)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Video running:</td>
+                                <td>{{currentSettings.videoIsRunning}}</td>
+                            </tr>
+                            <tr>
+                                <td>Video path:</td>
+                                <td>{{currentSettings.videoPath}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+
+
+                </mat-card-actions>
+            </mat-card>
+
+        </div>
+        <div fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+            <div class="img-overlay-wrap">
+
+                <!--<div style="margin-left:20%;">-->
+                <img src="{{videoFeedUrl}}">
+                <!--
+    </div>
+-->
+                <div *ngIf="currentSettings.currentDetectionMode == 3">
+                    <h1>Currently recording. All other detection modes are disabled.</h1>
+
+
+
+                </div>
+
+                <svg height="120" width="120" class="blinking" *ngIf="currentSettings.currentDetectionMode == 3">
+                    <circle cx="60" cy="60" r="0" fill="red" />
+                    Sorry, your browser does not support inline SVG.
+                </svg>
+
+            </div>
+        </div>
+
+        <!--<div fxFlex="0 1 calc(16.6% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+            <div class="">
+
+                <h2>Last face detected:</h2>
+                <div ><img height="300" src="{{videoFeedFaceimageUrl}}"></div>
+            
+            </div>
+        </div>-->
+        
+        <div fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%">
+            <div class="">
+
+            
+                <h2>Last face recognized:</h2>
+                <!--<div style="margin-left:20%;"><img width="480" height="360" src="{{baseUrl}}:5000/api/video_feed_faceimage"></div>-->
+                <div ><img height="300" src="{{videoFeedFaceimageRecUrl}}"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+   
+    <br />
+    <br />
+    <br />
+
+</div>
+<div ngshow style="padding: 0 24px 24px 24px;">
+    <canvas id="canvasOnline" style="width: 100%;">{{chartOnline}}</canvas>
+</div>
+
+<div ngshow style="padding: 0 24px 24px 24px;">
+    <canvas id="canvas" style="width: 100%;">{{chart}}</canvas>
+</div>

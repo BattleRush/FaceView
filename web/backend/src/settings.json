@@ -1,0 +1,15 @@
+{
+    "currentDetectionMode": 0,
+    "currentVideoMode": 1,
+    "liveResolution": 1,
+    "videoIsRunning": false,
+    "videoPath": "/home/test.avi",
+    "croppSettings": {
+        "x": 0,
+        "y": 0,
+        "height": 1399,
+        "width": 3264,
+        "originalHeight": 0,
+        "originalWidth": 0
+    }
+}

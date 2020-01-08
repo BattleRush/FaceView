@@ -1,0 +1,25 @@
+ sudo cp /home/karlo/Desktop/faceview.service /etc/systemd/system/faceview.service
+ sudo cp /home/karlo/Desktop/start.sh /usr/local/bin/start-faceview.sh
+
+ sudo systemctl start faceview
+ sudo systemctl stop faceview
+ sudo systemctl status  faceview
+
+ sudo systemctl daemon-reload
+
+
+journalctl -u faceview.service -b
+ sudo systemctl restart nvargus-daemon
+ nvpmodel -q
+
+https://github.com/NVIDIA-AI-IOT/jetbot/issues/47
+
+python3 /home/karlo/web/backend/src/api.py
+
+https://github.com/rbonghi/jetson_stats
+
+export PYTHONPATH=/home/karlo/github/facenet/src
+
+https://jkjung-avt.github.io/tf-trt-revisited/
+
+gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM), width=3280, height=1884,format=NV12, framerate=21/1' ! omxh264enc ! qtmux ! filesink location=LESSON_DAY_MONTH_COUNT.avi -e 

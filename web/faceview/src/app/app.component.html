@@ -1,0 +1,37 @@
+<body class="mat-typography app-frame mat-app-background" style="height: auto;">
+<!--<ul>
+        <li [routerLinkActive]="['link-active']"
+        [routerLinkActiveOptions]="{ exact : true }">
+    
+    <a [routerLink]="['/']">Home</a>
+        </li>
+        <li [routerLinkActive]="['link-active']"
+        [routerLinkActiveOptions]="{ exact : true }">
+    
+    <a [routerLink]="['/control']">control</a>
+        </li>
+        
+
+
+</ul>-->
+
+<nav mat-tab-nav-bar >
+        <a mat-tab-link
+        [routerLink]="['/home']">
+        Home
+        </a>
+
+        <a mat-tab-link
+        [routerLink]="['/control']">
+        Control
+        </a>
+
+        <a mat-tab-link
+        [routerLink]="['/faces']">
+        Faces
+        </a>
+        </nav>
+
+<router-outlet></router-outlet>
+
+</body>
